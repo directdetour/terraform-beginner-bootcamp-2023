@@ -1,2 +1,17 @@
 # Terraform Beginner Bootcamp 2023
 
+
+## Semantic Versioning :mage:
+
+**Add Semantic Versioning Documentation to Project**
+We want to document semantic versioning in our project.
+
+The project will utilize semantic versioning for its tagging [semver.org](https://semver.org/)
+
+general format: **MAJOR.MINOR.PATCH** eg `1.0.1`
+
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+- **MAJOR** version when you make incompatible API changes
+- **MINOR** version when you add functionality in a backward compatible manner
+- **PATCH** version when you make backward compatible bug fixes
