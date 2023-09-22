@@ -1,7 +1,7 @@
 # Terraform Beginner Bootcamp 2023
 
 
-## Semantic Versioning
+## Semantic Versioning :mage:
 
 **Add Semantic Versioning Documentation to Project**
 We want to document semantic versioning in our project.
