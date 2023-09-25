@@ -15,3 +15,89 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 - **MAJOR** version when you make incompatible API changes
 - **MINOR** version when you add functionality in a backward compatible manner
 - **PATCH** version when you make backward compatible bug fixes
+
+## Installing Terraform CLI
+
+### Considerations with the Terraform CLI changes
+The terraform Install instructions changed due to gpg keyring changes, so the original yaml for gitpod terraform installation has to be modified. Referring to the most recent install instructions: [Install Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+
+
+### Refactoring into Bash Scripts
+While fixing install issues, we decided the installation steps were too long for the yml file and moved script into its own file.
+
+bash script location - [./bin/install_terraform_cli](./bin/install_terrafrom_cli)
+
+- Keeps Gitpod Task File [.gitpod.yml](.gitpod.yml) tidy.
+- Allows easier debug and manual execution of the Terraform CLI install
+- Allows better portability for other projects that need to install Terraform CLI.
+
+### Considerations for the Linux Distribution
+
+#### Checking OS version
+This project is built using Ubuntu.
+Please consider checking your linux distribution and change according to your needs.
+[Check linux OS version](https://www.geeksforgeeks.org/how-to-check-the-os-version-in-linux/#)
+
+Example - checking OS version
+```
+$ cat /etc/os-release 
+PRETTY_NAME="Ubuntu 22.04.3 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.3 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+```
+
+
+
+#### Using Shebang
+
+A Shebang (pronounced Sha-bang) tells the system which program will interpret the script.
+
+https://en.wikipedia.org/wiki/Shebang_(Unix)
+
+
+chatGPT recommended `#!/usr/bin/env bash`
+- for portability bewteen different OS distros
+- will search the user's PATH for the bash executable
+
+
+#### Execution Considerations
+When executing the bash script we can use the `./` shorthand to execute the script.
+
+eg. `./bin/install_terraform_cli`
+
+If using it in gitpod.yml, must use source.
+
+eg. `source ./bin/install_terraform_cli`
+
+#### Linux permissions Considerations
+
+
+https://en.wikipedia.org/wiki/Chmod
+
+
+making bash script executable using chmod 
+
+eg. 
+```sh
+chmod u+x ./bin/install_terraform_cli
+```
+
+alternatively:
+```sh
+chmod 744 ./bin/install_terraform_cli
+```
+
+### Gitpod Lifecycle (Before, Init, Command)
+
+We need to be careful when using init because it will not rerun if  we restart an existing workspace
+
+https://www.gitpod.io/docs/configure/workspaces/tasks
