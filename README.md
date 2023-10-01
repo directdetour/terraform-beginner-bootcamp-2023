@@ -219,4 +219,26 @@ We can list all Terraform commands by typing `terraform`
 `.terraform` directory contains binaries of Terraform providers.
 
 
-### 
+## Issues with Terraform Cloud login and Gitpod Workspace
+
+`terraform login` attempts to launch a wysiwyg view to generate a token, this is not compatible with gitpod and vscode in the browser.
+
+#### Workaround
+Manually generate a new token at https://app.terraform.io/app/settings/tokens
+
+```sh
+touch /home/gitpod/.terraform.d/credentials.tfrc.json 
+open /home/gitpod/.terraform.d/credentials.tfrc.json 
+```
+Provide the following code using the new token value
+
+```json
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "RFAI7I3uxXw6zQ.atlasv1.qxwrvndcbYGhsJwwEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLE"      
+    }
+  }
+}
+
+```
