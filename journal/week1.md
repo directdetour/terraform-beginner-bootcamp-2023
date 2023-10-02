@@ -24,7 +24,7 @@ PROJECT_ROOT
 ### Terraform Cloud Variables
 
 In terraform we can set two kind of variables:
-- Enviroment Variables - those you would set in your bash terminal eg. AWS credentials
+- Environment Variables - those you would set in your bash terminal eg. AWS credentials
 - Terraform Variables - those that you would normally set in your tfvars file
 
 We can set Terraform Cloud variables to be sensitive so they are not shown visibliy in the UI.
@@ -53,8 +53,6 @@ Note: Ensure that the variable file is in the appropriate JSON or HCL format and
 ### terraform.tvfars
 
 This is the default file to load in terraform variables in blunk
-
-### auto.tfvars
 
 ### auto.tfvars
 
@@ -100,3 +98,25 @@ Terraform variables follow a specific order of precedence when their values are 
     - If none of the above sources provide a value for a variable, Terraform will use the default value specified in the variable declaration within your configuration file. Defaults are used when no other value is available.
 
 By understanding this order of precedence, you can effectively manage and override Terraform variable values to suit your specific use cases and environments.
+
+
+## Dealing With Configuration Drift
+
+## What happens if we lose our state file?
+
+If you lose your statefile, you most likely have to tear down all your cloud infrastructure manually.
+
+You can use terraform import but it won't work for all cloud resources. You need check the terraform providers documentation for which resources support import.
+
+### Fix Missing Resources with Terraform Import
+
+`terraform import aws_s3_bucket.bucket bucket-name`
+
+[Terraform Import](https://developer.hashicorp.com/terraform/cli/import)
+[AWS S3 Bucket Import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
+
+### Fix Manual Configuration
+
+If someone goes and delete or modifies cloud resource manually through ClickOps. 
+
+If we run Terraform plan is with attempt to put our infrstraucture back into the expected state fixing Configuration Drift
