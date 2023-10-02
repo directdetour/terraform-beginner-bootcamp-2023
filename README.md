@@ -242,3 +242,5 @@ Provide the following code using the new token value
 }
 
 ```
+
+This has been automated using a bash script [./bin/generate_tfrc_credentials](./bin/generate_tfrc_credentials)
